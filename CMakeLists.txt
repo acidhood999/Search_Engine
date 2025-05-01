@@ -8,16 +8,14 @@ endif()
 project("Search_Engine")
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/ConverterJSON
-    ${CMAKE_CURRENT_SOURCE_DIR}/InvertedIndex
-    ${CMAKE_CURRENT_SOURCE_DIR}/SearchServer
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 add_executable(Search_Engine 
-    "Search_Engine.cpp"
-    "ConverterJSON/Converter.cpp"
-    "InvertedIndex/InvertedIndex.cpp"
-    "SearchServer/SearchServer.cpp")
+    "src/Search_Engine.cpp"
+    "src/Converter.cpp"
+    "src/InvertedIndex.cpp"
+    "src/SearchServer.cpp")
 
 include(FetchContent)
 FetchContent_Declare(
@@ -41,18 +39,17 @@ target_link_libraries(Search_Engine PRIVATE gtest_main)
 include(GoogleTest)
 gtest_discover_tests(Search_Engine) 
 
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/ConverterJSON) 
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/JsonFile) 
 
-configure_file(${CMAKE_SOURCE_DIR}/ConverterJSON/config.json ${CMAKE_BINARY_DIR}/ConverterJSON/config.json COPYONLY)
-configure_file(${CMAKE_SOURCE_DIR}/ConverterJSON/request.json ${CMAKE_BINARY_DIR}/ConverterJSON/request.json COPYONLY)
-configure_file(${CMAKE_SOURCE_DIR}/ConverterJSON/answers.json ${CMAKE_BINARY_DIR}/ConverterJSON/answers.json COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/JsonFile/config.json ${CMAKE_BINARY_DIR}/JsonFile/config.json COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/JsonFile/request.json ${CMAKE_BINARY_DIR}/JsonFile/request.json COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/JsonFile/answers.json ${CMAKE_BINARY_DIR}/JsonFile/answers.json COPYONLY)
 
 configure_file(${CMAKE_SOURCE_DIR}/resources/file1.txt ${CMAKE_BINARY_DIR}/resources/file1.txt COPYONLY)
 configure_file(${CMAKE_SOURCE_DIR}/resources/file2.txt ${CMAKE_BINARY_DIR}/resources/file2.txt COPYONLY)
 configure_file(${CMAKE_SOURCE_DIR}/resources/file3.txt ${CMAKE_BINARY_DIR}/resources/file3.txt COPYONLY)
 configure_file(${CMAKE_SOURCE_DIR}/resources/file4.txt ${CMAKE_BINARY_DIR}/resources/file4.txt COPYONLY)
 configure_file(${CMAKE_SOURCE_DIR}/resources/file5.txt ${CMAKE_BINARY_DIR}/resources/file5.txt COPYONLY)
-
 
 if(CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Search_Engine PROPERTY CXX_STANDARD 20)

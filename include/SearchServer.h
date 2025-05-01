@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "InvertedIndex/InvertedIndex.h"
+#include "include/InvertedIndex.h"
 #include <algorithm>
 #include "Converter.h"
 

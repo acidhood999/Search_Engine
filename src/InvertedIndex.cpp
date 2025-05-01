@@ -1,6 +1,6 @@
 //InvertedIndex.cpp
 
-#include "InvertedIndex.h"
+#include "include/InvertedIndex.h"
 
 void InvertedIndex::UpdateDocumentBase(vector<string> input_docs)
 {
