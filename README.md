@@ -1,7 +1,7 @@
 
 <div align="center">
   
-# [Русская версия](README.md)  
+# [Русская версия](README_RU.md)  
 
 </div>
 
