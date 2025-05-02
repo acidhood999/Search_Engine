@@ -101,7 +101,6 @@ cd build && ctest --verbose
      }
 }
 ```
-#
 <div align="center">
   
 # [English version](README.md)  
