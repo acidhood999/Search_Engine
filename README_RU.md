@@ -1,9 +1,3 @@
-<div align="center">
-  
-# [English version](README.md)  
-
-</div>
-
 # Search Engine 🔍
 
 C++ поисковая система с инвертированным индексом, многопоточной обработкой и JSON-интерфейсом.
@@ -107,3 +101,8 @@ cd build && ctest --verbose
      }
 }
 ```
+<div align="center">
+  
+# [English version](README.md)  
+
+</div>
