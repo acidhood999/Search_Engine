@@ -30,13 +30,17 @@ C++ поисковая система с инвертированным инде
 
 ### Инструкция
 
-1. Клонирование репозитория:
 ```bash
+//1. Клонирование репозитория:
 git clone https://github.com/acidhood999/Search_Engine.git
 cd Search_Engine
 
-2. Сборка проекта:
+//2. Сборка проекта:
 cmake -B build -S .
 cmake --build build
 
-3. Запуск тестов:
+//3. Запуск тестов:
+cd build && ctest --verbose
+```
+
+⚙️ Конфигурация
