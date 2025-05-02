@@ -45,4 +45,4 @@ cmake --build build
 cd build && ctest --verbose
 ```
 
-⚙️ Конфигурация
+## ⚙️ Конфигурация
