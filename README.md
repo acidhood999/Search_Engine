@@ -1,60 +1,51 @@
-
-<div align="center">
-  
-# [Русская версия](README_RU.md)  
-
-</div>
-
 # Search Engine 🔍
 
-C++ поисковая система с инвертированным индексом, многопоточной обработкой и JSON-интерфейсом.
+# C++ Search Engine with Inverted Index, Multithreading, and JSON API
 
-## 📝 Описание проекта
+## 📝 Project Description
 
-Проект реализует поисковую систему с:
-- Многопоточной индексацией документов
-- Инвертированным индексом для быстрого поиска
-- Результаты по релевантности
-- С ограничением вывода результатов
-- JSON-для конфигурации и запросов
-- И с модульным тестированием
+This project implements a search engine with:
+- Multithreaded document indexing
+- Inverted index for fast searching
+- Relevance-based result ranking
+- Configurable result limit
+- JSON configuration and query interface
+- Modular unit testing
 
-## 🛠 Технологии
+## 🛠 Technologies
 
-- **Язык**: C++20
-- **Библиотеки**:
-  - nlohmann/json (v3.11.2) - работа с JSON
-  - Google Test (v1.13.0) - модульное тестирование
-- **Многопоточность**: std::thread + std::mutex
-- **Система сборки**: CMake ≥ 3.8
+- **Language**: C++20
+- **Libraries**:
+  - nlohmann/json (v3.11.2) - JSON processing
+  - Google Test (v1.13.0) - unit testing
+- **Multithreading**: std::thread + std::mutex
+- **Build System**: CMake ≥ 3.8
 
-## 🚀 Сборка и запуск
+## 🚀 Building and Running
 
-### Требования
-- Компилятор C++20
+### Requirements
+- C++20 compatible compiler
 - CMake ≥ 3.8
 - Git
 
-### Инструкция
-
-1. Клонирование репозитория:
+### Installation
 ```bash
 git clone https://github.com/acidhood999/Search_Engine.git
 cd Search_Engine
 ```
-2. Сборка проекта:
+2. Project build:
 ```bash
-cmake -B build -S .
+cmake -B build -S
 cmake --build build
 ```
-3. Запуск тестов:
+3. Running tests:
 ```bash
 cd build && ctest --verbose
 ```
 
-## ⚙️ Конфигурация
+## ⚙️ Configuration
 
-### Формат файлов
+### File format
 1. config.json:
 ```bash
 {
@@ -108,3 +99,8 @@ cd build && ctest --verbose
      }
 }
 ```
+<div align="center">
+  
+# [Русская версия](README_RU.md)  
+
+</div>
