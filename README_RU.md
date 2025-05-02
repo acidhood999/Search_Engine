@@ -37,7 +37,7 @@ cd Search_Engine
 ```
 2. Сборка проекта:
 ```bash
-cmake -B build -S .
+cmake -B build -S
 cmake --build build
 ```
 3. Запуск тестов:
