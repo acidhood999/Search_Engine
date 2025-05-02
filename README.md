@@ -1,5 +1,9 @@
 
-#                                                                                                                                                                             [English version](README_EN.md)
+<div align="center">
+  
+# [English version](README_EN.md)  
+
+</div>
 
 # Search Engine 🔍
 
