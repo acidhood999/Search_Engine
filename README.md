@@ -1,6 +1,6 @@
 # Search Engine 🔍
 
-# C++ Search Engine with Inverted Index, Multithreading, and JSON API
+C++ Search Engine with Inverted Index, Multithreading, and JSON API
 
 ## 📝 Project Description
 
