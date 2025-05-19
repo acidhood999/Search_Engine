@@ -4,42 +4,38 @@
 
 vector<string> ConverterJSON::GetTextDocuments()
 {
-
 	file_i.open(config_path);
-	
+
 	if (!file_i.is_open())
 	{
-		cout << "error opening file" << endl;
-		return {};
+		throw runtime_error("config file is missing");
 	}
-	
+
 	file_i >> dict;
-	
+	file_i.close();
+
 	for (auto path : dict["files"])
 	{
 		config_file.push_back(path.get<string>());
 	}
-	
-	file_i.close();
-	
-	for (int i{}; i < config_file.size(); ++i)
-	{  
-		file_i.open(config_file[i]);  
+
+	for (auto filepath : config_file)
+	{
+		file_i.open(filepath);
 		if (!file_i.is_open())
 		{
-			cout << "error opening file " << config_file[i] << endl;
+			cout << "error opening file " << filepath <<endl;
 			continue;
 		}
 
-		while (file_i >> word) 
-		{  
-			config_text.push_back(word);
-		}
+		stringstream buffer;
+		buffer << file_i.rdbuf();
+		config_text.push_back(buffer.str());
+
 		file_i.close();
 	}
 
 	return config_text;
-
 }
 
 int ConverterJSON::GetResponsesLimit()
@@ -49,13 +45,21 @@ int ConverterJSON::GetResponsesLimit()
 
 	if (!file_i.is_open())
 	{
-		cout << "error opening file" << endl;
-		return {};
+		throw runtime_error("config file is missing");
 	}
 
 	file_i >> dict;
 
-	max_responses = dict["config"]["max_responses"].get<int>();
+	if (dict.contains("config")) 
+	{
+		max_responses = dict["config"]["max_responses"].get<int>();
+	}
+	else 
+	{
+		throw runtime_error("config file is empty");
+	}
+	
+	
 
 	file_i.close();
 
@@ -68,49 +72,54 @@ vector<string> ConverterJSON::GetRequests()
 
 	if (!file_i.is_open())
 	{
-		cout << "error opening file" << endl;
-		return {};
+		throw runtime_error("request file is missing");
 	}
 
 	file_i >> dict;
-
-	
-	for (auto path : dict["requests"])
-	{
-		string request = path.get<string>();
-		istringstream word_line(request);
-		while (word_line >> word)
-		{
-			requests_file.push_back(word);
-		}
-		
-	}
-
 	file_i.close();
 
+	for (auto path : dict["requests"])
+	{
+		requests_file.push_back(path.get<string>());
+	}
+
 	return requests_file;
+	
 }
 
-void ConverterJSON::putAnswers(vector<vector<pair<int, float>>> answers)
+void ConverterJSON::putAnswers(vector<vector<pair<int, float>>> answers) 
 {
+	json output_json;
+
 	for (int i = 0; i < answers.size(); i++)
 	{
 		json request_r;
-		request_r["result"] = !answers[i].empty();
+		auto result_vector = answers[i];
 
-		if (!answers[i].empty())
+		ostringstream req_id_stream;
+		req_id_stream << "request" << setfill('0') <<setw(3) << (i + 1);
+		string request_id = req_id_stream.str();
+
+		request_r["result"] = !result_vector.empty();
+
+		
+		if (result_vector.size() > 1) 
 		{
-			json relevance_a;
-			for (int j = 0; j < answers[i].size(); ++j)
+			json relevance_a = json::array();
+			for (auto [docid, rank] : result_vector) 
 			{
-				relevance_a.push_back({ {"docid", answers[i][j].first}, {"rank", answers[i][j].second} });
+				relevance_a.push_back({
+					{"docid", docid},
+					{"rank", rank}
+					});
 			}
 			request_r["relevance"] = relevance_a;
 		}
-		dict["answers"][request_id + to_string(i + 1)] = request_r;
+
+		output_json["answers"][request_id] = request_r;
 	}
 
 	file_o.open(answers_path);
-	file_o << setw(4) << dict << endl;
+	file_o << setw(4) << output_json <<endl;
 	file_o.close();
 }

@@ -9,6 +9,9 @@ mutex freq_dictionary_mutex;
 
 void InvertedIndex::UpdateDocumentBase(vector<string> input_docs) 
 {
+    docs.clear();
+    freq_dictionary.clear();
+
     docs = input_docs;
     vector<thread> threads;
 

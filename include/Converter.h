@@ -15,11 +15,10 @@ class ConverterJSON
 {
 private:
 	
-	const string config_path = "ConverterJSON/config.json";
-	const string requests_path = "ConverterJSON/request.json";
-	const string answers_path = "ConverterJSON/answers.json";
+	const string config_path = "JsonFile/config.json";
+	const string requests_path = "JsonFile/request.json";
+	const string answers_path = "JsonFile/answers.json";
 
-	string request_id = "request";
 	string word;
 	
 	ifstream file_i;
@@ -32,6 +31,7 @@ private:
 	vector<string> config_file;
 	vector<string> config_text;
 	vector<string> requests_file;
+	vector<string> requests_file_line;
 	vector<pair<int, float>> requests_answers;
 
 public:

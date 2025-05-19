@@ -4,6 +4,8 @@
 
 using namespace std;
 
+
+
 void TestInvertedIndexFunctionality(
 	const vector<string>& docs,
 	const vector<string>& requests,

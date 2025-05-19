@@ -29,7 +29,7 @@ private:
 	map<string, vector<Entry>> freq_dictionary;
 
 	string word;
-	 
+	
 public:
 	InvertedIndex() = default;
 	
