@@ -89,7 +89,6 @@ vector<string> ConverterJSON::GetRequests()
 
 void ConverterJSON::putAnswers(vector<vector<pair<int, float>>> answers) 
 {
-	json output_json;
 
 	for (int i = 0; i < answers.size(); i++)
 	{

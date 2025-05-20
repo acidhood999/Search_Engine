@@ -25,7 +25,8 @@ private:
 	ofstream file_o;
 	
 	json dict;
-	
+	json output_json;
+
 	int max_responses{};
 	
 	vector<string> config_file;

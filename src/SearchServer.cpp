@@ -4,7 +4,6 @@
 
 vector<vector<RelativeIndex>> SearchServer::search(const vector<string>& queries)
 {
-
     for (int q = 0; q < queries.size(); ++q)
     {
         string query = queries[q];
@@ -14,30 +13,15 @@ vector<vector<RelativeIndex>> SearchServer::search(const vector<string>& queries
         ranked.clear();
         max_freq = 0;
 
-        for (int i = 0; i < query.size(); ++i)
+        istringstream iss(query);
+        while (iss >> word)
         {
-            char c = query[i];
-            if (c == ' ')
-            {
-                if (!word.empty()) words.push_back(word);
-                word.clear();
-            }
-            else
-            {
-                word += c;
-            }
+            words.push_back(word);
         }
-        words.push_back(word);
 
-       
-        for (int i = 0; i < words.size(); ++i)
-        {
-            for (int j = i + 1; j < words.size(); )
-            {
-                if (words[i] == words[j]) words.erase(words.begin() + j);
-                else ++j;
-            }
-        }
+        
+        set<string> unique_words(words.begin(), words.end());
+        words.assign(unique_words.begin(), unique_words.end());
 
         for (int i = 0; i < words.size(); ++i)
         {
@@ -56,25 +40,26 @@ vector<vector<RelativeIndex>> SearchServer::search(const vector<string>& queries
         for (auto it = doc_freq.begin(); it != doc_freq.end(); ++it)
         {
             float rank = 0;
-            if (max_freq > 0) rank = (float)it->second / max_freq;
+            if (max_freq > 0) rank = float(it->second) / max_freq;
 
             ranked.push_back({ it->first, rank });
         }
 
-      
-        sort(ranked.begin(), ranked.end(), [](RelativeIndex a, RelativeIndex b)
+        sort(ranked.begin(), ranked.end(), [](const auto& a, const auto& b)
         {
-            if (a.rank != b.rank) return a.rank > b.rank;
-                return a.doc_id < b.doc_id;
+            return b.rank < a.rank;
         });
 
-        while (ranked.size() > 5)
+        int limit = file_recording.GetResponsesLimit();
+
+        if (ranked.size() > limit)
         {
-            ranked.pop_back();
+            ranked.resize(limit);
         }
 
         all_results.push_back(ranked);
 
+        query_answers.clear();
         for (int i = 0; i < ranked.size(); ++i)
         {
             query_answers.push_back({ ranked[i].doc_id, ranked[i].rank });
@@ -83,5 +68,5 @@ vector<vector<RelativeIndex>> SearchServer::search(const vector<string>& queries
         file_recording.putAnswers({ query_answers });
     }
 
-    return all_results; 
+    return all_results;
 }

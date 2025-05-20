@@ -5,6 +5,7 @@
 #include "include/InvertedIndex.h"
 #include <algorithm>
 #include "Converter.h"
+#include <set>
 
 using namespace std;
 
