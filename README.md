@@ -1,8 +1,8 @@
-# Search Engine 🔍
+# Search Engine
 
 C++ Search Engine with Inverted Index, Multithreading, and JSON API
 
-## 📝 Project Description
+## Project Description
 
 This project implements a search engine with:
 - Multithreaded document indexing
@@ -12,7 +12,7 @@ This project implements a search engine with:
 - JSON configuration and query interface
 - Modular unit testing
 
-## 🛠 Technologies
+## Technologies
 
 - **Language**: C++20
 - **Libraries**:
@@ -21,7 +21,7 @@ This project implements a search engine with:
 - **Multithreading**: std::thread + std::mutex
 - **Build System**: CMake ≥ 3.8
 
-## 🚀 Building and Running
+## Building and Running
 
 ### Requirements
 - C++20 compatible compiler
@@ -43,7 +43,7 @@ cmake --build build
 cd build && ctest --verbose
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 ### File format
 1. config.json:
