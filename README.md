@@ -25,7 +25,7 @@ This project implements a search engine with:
 
 ### Requirements
 - C++20 compatible compiler
-- CMake ≥ 3.8
+- CMake > 3.8
 - Git
 
 ### Installation
