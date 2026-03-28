@@ -101,6 +101,8 @@ cd build && ctest --verbose
      }
 }
 ```
+---
+*Created by [acidhood999](https://github.com/acidhood999)*
 <div align="center">
   
 # [English version](README.md)  
